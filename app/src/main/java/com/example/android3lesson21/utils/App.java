@@ -1,4 +1,4 @@
-package com.example.android3lesson21;
+package com.example.android3lesson21.utils;
 
 import android.app.Application;
 

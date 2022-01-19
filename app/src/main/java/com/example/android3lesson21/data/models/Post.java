@@ -2,10 +2,15 @@ package com.example.android3lesson21.data.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Post {
+import java.io.Serializable;
 
+public class Post implements Serializable {
+
+    @SerializedName("id")
     int id;
+    @SerializedName("title")
     String title;
+    @SerializedName("content")
     String content;
     @SerializedName("user")
     int userId;
@@ -57,5 +62,16 @@ public class Post {
 
     public void setGroupId(int groupId) {
         this.groupId = groupId;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", userId=" + userId +
+                ", groupId=" + groupId +
+                '}';
     }
 }
