@@ -25,6 +25,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
     @SuppressLint("NotifyDataSetChanged")
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+        name.put(1,"Аделя");
+        name.put(2,"Адема");
+        name.put(3,"Аделя");
+        name.put(4,"Ринат");
+        name.put(5,"Алым");
+        name.put(6,"Алиаскар");
+        name.put(7,"Баястан");
+        name.put(8,"Рустам");
+        name.put(9,"Алишер");
+        name.put(10,"Алымбек");
         notifyDataSetChanged();
     }
 
@@ -76,6 +86,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
             binding.tvUserId.setText(name.get(post.getUserId()));
             binding.tvContent.setText(post.getContent());
             binding.tvTitle.setText(post.getTitle());
+            binding.tvGroup.setText(Integer.toString(post.getGroupId()));
         }
     }
 }
