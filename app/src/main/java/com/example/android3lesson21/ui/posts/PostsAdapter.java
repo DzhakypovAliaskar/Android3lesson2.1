@@ -17,7 +17,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
     private final HashMap<Integer, String> name = new HashMap<>();
     private ItemOnClick itemOnClick;
     private List<Post> posts = new ArrayList<>();
-    private ItemPostBinding binding;
 
     public void setItemOnClick(ItemOnClick itemOnClick) {
         this.itemOnClick = itemOnClick;
@@ -32,7 +31,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-         binding = ItemPostBinding.inflate(
+        ItemPostBinding binding = ItemPostBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
@@ -50,13 +49,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
         return posts.size();
     }
 
+    public Post getPost(int position) {
+        return posts.get(position);
+    }
+
     public void removeItem(int position) {
         posts.remove(position);
         notifyItemRemoved(position);
-    }
-
-    public Post getPost(int position) {
-        return posts.get(position);
     }
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
@@ -73,11 +72,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewHold
             });
         }
 
-        void onBind(Post post) {
+        public void onBind(Post post) {
             binding.tvUserId.setText(name.get(post.getUserId()));
             binding.tvContent.setText(post.getContent());
             binding.tvTitle.setText(post.getTitle());
-            binding.tvGroup.setText(String.valueOf(post.getGroupId()));
         }
     }
 }

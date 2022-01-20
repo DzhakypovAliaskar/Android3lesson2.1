@@ -55,10 +55,11 @@ public class FormFragment extends Fragment {
         }
 
         binding.btnSend.setOnClickListener(view1 -> {
-            String title = binding.edTitle.getText().toString();
-            String content = binding.edContent.getText().toString();
-            Post post = new Post(title, content, userId, groupId);
             if (post1 == null){
+                String title = binding.edTitle.getText().toString();
+                String content = binding.edContent.getText().toString();
+                Post post = new Post(title, content, userId, groupId);
+
                 App.api.createPost(post).enqueue(new Callback<Post>() {
                     @Override
                     public void onResponse(@NonNull Call<Post> call, @NonNull Response<Post> response) {
@@ -74,6 +75,10 @@ public class FormFragment extends Fragment {
                     }
                 });
             }else {
+                String title = binding.edTitle.getText().toString();
+                String content = binding.edContent.getText().toString();
+                Post post = new Post(title, content, userId, groupId);
+
                 App.api.update(post1.getId(), post).enqueue(new Callback<Post>() {
                     @Override
                     public void onResponse(@NonNull Call<Post> call, @NonNull Response<Post> response) {
