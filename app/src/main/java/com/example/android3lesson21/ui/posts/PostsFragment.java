@@ -47,7 +47,7 @@ public class PostsFragment extends Fragment {
             @Override
             public void onLongClick(int position) {
                 Post post3 = adapter.getPost(position);
-                if (post3.getUserId() == 2) {
+                if (post3.getUserId() == 6) {
                     App.api.deletePosts(post3.getId()).enqueue(new Callback<Post>() {
                         @Override
                         public void onResponse(@NonNull Call<Post> call, @NonNull Response<Post> response) {
@@ -59,9 +59,9 @@ public class PostsFragment extends Fragment {
 
                         }
                     });
-                } else
+                } else {
                     Toast.makeText(requireActivity(), "вы не можете удалять чужие записи", Toast.LENGTH_SHORT).show();
-
+                }
             }
         });
     }
@@ -74,8 +74,6 @@ public class PostsFragment extends Fragment {
                 container,
                 false
         );
-        adapter = new PostsAdapter();
-        controller = Navigation.findNavController(requireActivity(),R.id.nav_host_fragment);
         return binding.getRoot();
     }
 
@@ -83,20 +81,11 @@ public class PostsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.recycler.setAdapter(adapter);
-        getPosts();
-        setupListeners();
-    }
 
-    private void setupListeners() {
-        binding.fab.setOnClickListener(view ->
-                controller.navigate(R.id.action_postsFragment_to_formFragment));
-    }
-
-    private void getPosts() {
         App.api.getPosts(5).enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(@NonNull Call<List<Post>> call, @NonNull Response<List<Post>> response) {
-                if (response.isSuccessful() && response.body() != null){
+                if (response.isSuccessful() && response.body() != null) {
                     adapter.setPosts(response.body());
                 }
             }
@@ -106,13 +95,13 @@ public class PostsFragment extends Fragment {
 
             }
         });
-        initListeners();
+        setupListeners();
     }
 
-    private void initListeners() {
+    private void setupListeners() {
         binding.fab.setOnClickListener(view -> {
-            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-            navController.navigate(R.id.formFragment);
+            NavController controller = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+            controller.navigate(R.id.formFragment);
         });
     }
 
